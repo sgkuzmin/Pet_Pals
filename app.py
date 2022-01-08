@@ -36,6 +36,14 @@ def home():
 def playerpos():
     return render_template("playerpos.html")
 
+@app.route("/draftcard")
+def draftcard():
+    return render_template("draftcard.html")
+
+@app.route("/predmodel")
+def predmodel():
+    return render_template("predmodel.html")
+
 # Query the database and send the jsonified results
 @app.route("/send", methods=["GET", "POST"])
 def send():
