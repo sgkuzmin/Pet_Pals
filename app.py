@@ -46,6 +46,7 @@ def draftcard():
 
 @app.route("/predmodel", methods=["GET", "POST"])
 def predmodel():
+    result={'intercept':' ','passingyards':' ','fumble':' ','passingcomplete':' ','score':' '}
     if request.method == "POST":
         intercept = request.form["PlayerIntercept"]
         passingyards = request.form["PlayerPassingYards"]
@@ -63,9 +64,12 @@ def predmodel():
         loaded_model = pickle.load(open(filename, 'rb'))
         newguypoint = loaded_model.predict(xdf_scaled)
 
-        print(newguypoint)
         
-    return render_template("predmodel.html")
+        result={'intercept':intercept,'passingyards':passingyards,'fumble':fumble,'passingcomplete':passingcomplete,'score':newguypoint[0]}
+        
+        return render_template("predmodel.html",result=result)
+        
+    return render_template("predmodel.html",result=result)
 
 # Query the database and send the jsonified results
 @app.route("/send", methods=["GET", "POST"])

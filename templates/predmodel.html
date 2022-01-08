@@ -44,6 +44,32 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-9">
+                <div id="table-area" class="">
+                  <table id="player-table" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="table-head">Interception</th>
+                        <th class="table-head">Yard Per TD</th>
+                        <th class="table-head">Fumble</th>
+                        <th class="table-head">Passing Completion</th>
+                        <th class="table-head">Score</th>
+                      </tr>
+                      <tr>
+                        <td>{{result.intercept}}</td>
+                        <td>{{result.passingyards}}</td>
+                        <td>{{result.fumble}}</td>
+                        <td>{{result.passingcomplete}}</td>
+                        <td>{{result.score}}</td>
+                      </tr>
+                    </thead>
+                    <tbody id="player_table_body"></tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+
    
     </div>
 
