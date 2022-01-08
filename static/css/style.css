@@ -38,3 +38,18 @@
     background-color: #04AA6D;
     color: white;
   }
+
+/* Images */
+img{
+  width: 50%;
+  height:75%;
+}
+.active, .panel:hover {
+  border-color:rgb(0, 0, 0);
+  border-style: solid;
+  
+}
+.vizualization {
+  width:50%;
+  height:50%;
+}
