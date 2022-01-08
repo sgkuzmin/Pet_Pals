@@ -31,7 +31,10 @@ Pet = create_classes(db)
 @app.route("/")
 def home():
     return render_template("index.html")
-
+    
+@app.route("/playerpos")
+def playerpos():
+    return render_template("playerpos.html")
 
 # Query the database and send the jsonified results
 @app.route("/send", methods=["GET", "POST"])
