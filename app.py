@@ -1,6 +1,7 @@
 # import necessary libraries
 from models import create_classes
 import os
+import pickle
 from flask import (
     Flask,
     render_template,
@@ -40,8 +41,17 @@ def playerpos():
 def draftcard():
     return render_template("draftcard.html")
 
-@app.route("/predmodel")
+@app.route("/predmodel", methods=["GET", "POST"])
 def predmodel():
+    if request.method == "POST":
+        intercept = request.form["PlayerIntercept"]
+        passingyards = request.form["PlayerPassingYards"]
+        fumble = request.form["PlayerFumble"]
+        passingcomplete = request.form["PlayerPassingComplete"]
+
+        
+        
+        return redirect("/", code=302)
     return render_template("predmodel.html")
 
 # Query the database and send the jsonified results
