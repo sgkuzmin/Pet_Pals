@@ -2,6 +2,9 @@
 from models import create_classes
 import os
 import pickle
+import joblib
+import pandas as pd
+
 from flask import (
     Flask,
     render_template,
@@ -49,9 +52,19 @@ def predmodel():
         fumble = request.form["PlayerFumble"]
         passingcomplete = request.form["PlayerPassingComplete"]
 
+        x_scaler = joblib.load('QBscaler.gz')
+
+        datadict = {"Interceptions": intercept, "Passing Yards Per TD": passingyards, "Fumbles": fumble, "Passing Completion Per Attempts": passingcomplete}
         
+        xdf = pd.DataFrame([datadict])
+        xdf_scaled = x_scaler.transform(xdf)
+
+        filename = 'QuaterbackModel_trained.sav'
+        loaded_model = pickle.load(open(filename, 'rb'))
+        newguypoint = loaded_model.predict(xdf_scaled)
+
+        print(newguypoint)
         
-        return redirect("/", code=302)
     return render_template("predmodel.html")
 
 # Query the database and send the jsonified results
