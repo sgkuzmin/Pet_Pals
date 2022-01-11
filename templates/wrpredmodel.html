@@ -19,28 +19,31 @@
         <a href="/rbpredmodel">Predictive Model RB</a>
       </div>
 
-
     <div class="container">
        
 
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
-                <form method="POST" action="/predmodel" role="form", name="playerform">
+                <form method="POST" action="/wrpredmodel" role="form", name="playerform">
                     <div class="form-group">
-                        <label for="inputIntercept">What is the Player Interception for this season?</label>
-                        <input type="text" class="form-control" id="inputIntercept" name="PlayerIntercept" placeholder="Intercept">
+                        <label for="inputPlayerReceptions">How many Receptions does this player have for this season?</label>
+                        <input type="text" class="form-control" id="inputPlayerReceptions" name="PlayerReceptions" placeholder="Recyardsperse">
                     </div>
                     <div class="form-group">
-                        <label for="inputYard">What is the Player Passing Yard Per TD for this season?</label>
-                        <input type="text" class="form-control" id="inputYard" name="PlayerPassingYards" placeholder="Yards">
+                        <label for="inputPlayerRecyardsperse">What is the Player Receiving Yards for this season? </label>
+                        <input type="text" class="form-control" id="inputPlayerRecyardsperse" name="PlayerRecyardsperse" placeholder="PlayerRecyardsperse">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPlayerRecyardsperrec">What is the Player Receiving Yards per Reception this season? </label>
+                        <input type="text" class="form-control" id="inputPlayerRecyardsperrec" name="PlayerRecyardsperrec" placeholder="Recyardsperrec">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPlayerRecyardspertd">What is the Player Receiving Yards per TD this season?</label>
+                        <input type="text" class="form-control" id="inputPlayerRecyardspertd" name="PlayerRecyardspertd" placeholder="Recyardspertd">
                     </div>
                     <div class="form-group">
                         <label for="inputFumble">How many times did this Player Fumble this season?</label>
                         <input type="text" class="form-control" id="inputFumble" name="PlayerFumble" placeholder="Fumble">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputComplete">What is the Player Passing Completion Per Attempt this season?</label>
-                        <input type="text" class="form-control" id="inputComplete" name="PlayerPassingComplete" placeholder="Complete">
                     </div>
                     <input type="submit" value="submit" class="btn btn-default">
                 </form>
@@ -53,17 +56,19 @@
                   <table id="player-table" class="table table-striped">
                     <thead>
                       <tr>
-                        <th class="table-head">Interception</th>
-                        <th class="table-head">Yard Per TD</th>
+                        <th class="table-head">Receptions</th>
+                        <th class="table-head">Rec. Yards per season</th>
+                        <th class="table-head">Rec. Yards per Rec.</th>
+                        <th class="table-head">Rec. Yards per TD</th>
                         <th class="table-head">Fumble</th>
-                        <th class="table-head">Passing Completion</th>
-                        <th class="table-head">Predicted Score</th>
+                        <th class="table-head">Score</th>
                       </tr>
                       <tr>
-                        <td>{{result.intercept}}</td>
-                        <td>{{result.passingyards}}</td>
+                        <td>{{result.receptions}}</td>
+                        <td>{{result.recyardsperse}}</td>
+                        <td>{{result.recyardsperrec}}</td>
+                        <td>{{result.recyardspertd}}</td>
                         <td>{{result.fumble}}</td>
-                        <td>{{result.passingcomplete}}</td>
                         <td>{{result.score}}</td>
                       </tr>
                     </thead>

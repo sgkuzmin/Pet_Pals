@@ -44,10 +44,10 @@ def playerpos():
 def draftcard():
     return render_template("draftcard.html")
 
-@app.route("/predmodel", methods=["GET", "POST"])
+@app.route("/predmodel", endpoint='predmodel', methods=["GET", "POST"])
 def predmodel():
     result={'intercept':' ','passingyards':' ','fumble':' ','passingcomplete':' ','score':' '}
-    if request.method == "POST":
+    if request.method == "POST" and request.endpoint == 'predmodel':
         intercept = request.form["PlayerIntercept"]
         passingyards = request.form["PlayerPassingYards"]
         fumble = request.form["PlayerFumble"]
@@ -70,6 +70,61 @@ def predmodel():
         return render_template("predmodel.html",result=result)
         
     return render_template("predmodel.html",result=result)
+
+@app.route("/wrpredmodel", endpoint='wrpredmodel' , methods=["GET", "POST"])
+def wrpredmodel():
+    result={'receptions':' ','recyardsperse':' ','recyardsperrec':' ','recyardspertd':' ','fumble':' ', 'score':' '}
+    if request.method == "POST" and request.endpoint == 'wrpredmodel':
+        receptions = request.form["PlayerReceptions"]
+        recyardsperse = request.form["PlayerRecyardsperse"]
+        recyardsperrec = request.form["PlayerRecyardsperrec"]
+        recyardspertd = request.form["PlayerRecyardspertd"]
+        fumble = request.form["PlayerFumble"]
+        
+        x_scaler = joblib.load('WRscaler.gz')
+
+        datadict = {'receptions':receptions,'recyardsperse':recyardsperse,'recyardsperrec':recyardsperrec,'recyardspertd':recyardspertd,'fumble':fumble}
+        
+        xdf = pd.DataFrame([datadict])
+        xdf_scaled = x_scaler.transform(xdf)
+
+        filename = 'Widereceiver_trained.sav'
+        loaded_model = pickle.load(open(filename, 'rb'))
+        newguypoint = loaded_model.predict(xdf_scaled)
+
+        
+        result={'receptions':receptions,'recyardsperse':recyardsperse,'recyardsperrec':recyardsperrec,'recyardspertd':recyardspertd,'fumble':fumble,'score':newguypoint[0]}
+        
+        return render_template("wrpredmodel.html",result=result)
+        
+    return render_template("wrpredmodel.html",result=result)
+
+@app.route("/rbpredmodel", endpoint='rbpredmodel', methods=["GET", "POST"])
+def rbpredmodel():
+    result={'rushattempts':' ','rushyards':' ','recyardspertd':' ','fumble':' ','score':' '}
+    if request.method == "POST" and request.endpoint == 'rbpredmodel':
+        rushattempts = request.form["PlayerRushattempts"]
+        rushyards = request.form["PlayerRushyards"]
+        recyardspertd = request.form["PlayerRecyardspertd"]
+        fumble = request.form["PlayerFumble"]
+
+        x_scaler = joblib.load('RBscaler.gz')
+
+        datadict = {"Rushattempts": rushattempts, "Rushyards": rushyards, "Recyardspertd": recyardspertd, "Fumble": fumble}
+        
+        xdf = pd.DataFrame([datadict])
+        xdf_scaled = x_scaler.transform(xdf)
+
+        filename = 'Runningback_trained.sav'
+        loaded_model = pickle.load(open(filename, 'rb'))
+        newguypoint = loaded_model.predict(xdf_scaled)
+
+        
+        result={'rushattempts':rushattempts,'rushyards':rushyards,'recyardspertd':recyardspertd,'fumble':fumble,'score':newguypoint[0]}
+        
+        return render_template("rbpredmodel.html",result=result)
+        
+    return render_template("rbpredmodel.html",result=result)
 
 # Query the database and send the jsonified results
 @app.route("/send", methods=["GET", "POST"])

@@ -25,22 +25,22 @@
 
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
-                <form method="POST" action="/predmodel" role="form", name="playerform">
+                <form method="POST" action="/rbpredmodel" role="form", name="playerform">
                     <div class="form-group">
-                        <label for="inputIntercept">What is the Player Interception for this season?</label>
-                        <input type="text" class="form-control" id="inputIntercept" name="PlayerIntercept" placeholder="Intercept">
+                        <label for="inputPlayerRushattempts">How many times did this player Rush Attempt?</label>
+                        <input type="text" class="form-control" id="inputPlayerRushattempts" name="PlayerRushattempts" placeholder="Rushattempts">
                     </div>
                     <div class="form-group">
-                        <label for="inputYard">What is the Player Passing Yard Per TD for this season?</label>
-                        <input type="text" class="form-control" id="inputYard" name="PlayerPassingYards" placeholder="Yards">
+                        <label for="inputPlayerRushyards">How many yards did this player Rush?</label>
+                        <input type="text" class="form-control" id="inputPlayerRushyards" name="PlayerRushyards" placeholder="Rushyards">
                     </div>
                     <div class="form-group">
-                        <label for="inputFumble">How many times did this Player Fumble this season?</label>
-                        <input type="text" class="form-control" id="inputFumble" name="PlayerFumble" placeholder="Fumble">
+                        <label for="inputPlayerRecyardspertd">What is the Player Receiving Yards per TD this season?</label>
+                        <input type="text" class="form-control" id="inputPlayerRecyardspertd" name="PlayerRecyardspertd" placeholder="Recyardspertd">
                     </div>
                     <div class="form-group">
-                        <label for="inputComplete">What is the Player Passing Completion Per Attempt this season?</label>
-                        <input type="text" class="form-control" id="inputComplete" name="PlayerPassingComplete" placeholder="Complete">
+                        <label for="inputPlayerFumble">How many times did this Player Fumble this season?</label>
+                        <input type="text" class="form-control" id="inputPlayerFumble" name="PlayerFumble" placeholder="Fumble">
                     </div>
                     <input type="submit" value="submit" class="btn btn-default">
                 </form>
@@ -53,17 +53,17 @@
                   <table id="player-table" class="table table-striped">
                     <thead>
                       <tr>
-                        <th class="table-head">Interception</th>
-                        <th class="table-head">Yard Per TD</th>
+                        <th class="table-head">Rush Attempts</th>
+                        <th class="table-head">Rush Yards</th>
+                        <th class="table-head">Rec Yards per TD</th>
                         <th class="table-head">Fumble</th>
-                        <th class="table-head">Passing Completion</th>
                         <th class="table-head">Predicted Score</th>
                       </tr>
                       <tr>
-                        <td>{{result.intercept}}</td>
-                        <td>{{result.passingyards}}</td>
+                        <td>{{result.rushattempts}}</td>
+                        <td>{{result.rushyards}}</td>
+                        <td>{{result.recyardspertd}}</td>
                         <td>{{result.fumble}}</td>
-                        <td>{{result.passingcomplete}}</td>
                         <td>{{result.score}}</td>
                       </tr>
                     </thead>
